@@ -14,20 +14,25 @@ def read_html_data():
 
 
 def filter_animals_data(animals_data):
-    """Filters the animals_data only for specific given keys"""
+    """Filters the animals_data only for specific given keys and serializes to new HTML format"""
     output = ""
     for animal in animals_data:
         location_list = animal.get("locations")
-        output += '<li class="cards__item">'
+        output += '<li class="cards__item">\n'
+
+
         if "name" in animal:
-            output += f'Name: {animal["name"]}<br/>\n'
-        if "diet" in animal["characteristics"]:
-            output += f'Diet: {animal["characteristics"]["diet"]}<br/>\n'
+            output += f'  <div class="card__title">{animal["name"]}</div>\n'
+        output += '  <p class="card__text">\n'
+        if "diet" in animal.get("characteristics", {}):
+            output += f'    <strong>Diet:</strong> {animal["characteristics"]["diet"]}<br/>\n'
         if location_list:
-            output += f'Location: {location_list[0]}<br/>\n'
-        if "type" in animal["characteristics"]:
-            output += f'Type: {animal["characteristics"]["type"]}<br/>\n'
-        output += '</li>'
+            output += f'    <strong>Location:</strong> {location_list[0]}<br/>\n'
+        if "type" in animal.get("characteristics", {}):
+            output += f'    <strong>Type:</strong> {animal["characteristics"]["type"]}<br/>\n'
+
+        output += '  </p>\n'
+        output += '</li>\n'
 
     return output
 
