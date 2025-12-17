@@ -18,14 +18,16 @@ def filter_animals_data(animals_data):
     output = ""
     for animal in animals_data:
         location_list = animal.get("locations")
+        output += '<li class="cards__item">'
         if "name" in animal:
-            output += f'Name: {animal["name"]}\n'
+            output += f'Name: {animal["name"]}<br/>\n'
         if "diet" in animal["characteristics"]:
-            output += f'Diet: {animal["characteristics"]["diet"]}\n'
+            output += f'Diet: {animal["characteristics"]["diet"]}<br/>\n'
         if location_list:
-            output += f'Location: {location_list[0]}\n'
+            output += f'Location: {location_list[0]}<br/>\n'
         if "type" in animal["characteristics"]:
-            output += f'Type: {animal["characteristics"]["type"]}\n'
+            output += f'Type: {animal["characteristics"]["type"]}<br/>\n'
+        output += '</li>'
 
     return output
 
@@ -41,9 +43,10 @@ def write_new_html_file(animals_data):
 
 def main():
     animals_data = load_data('animals_data.json')
-    print(filter_animals_data(animals_data))
+    #print(filter_animals_data(animals_data))
     print(replace_info(animals_data))
     write_new_html_file(animals_data)
+
 
 
 if __name__ == "__main__":
