@@ -51,10 +51,13 @@ def write_new_html_file(animals_data):
 
 
 def main():
-    animals_data = load_data('animals_data.json')
-    #print(serialize_animal(animals_data))
-    print(replace_info(animals_data))
-    #write_new_html_file(animals_data) #Only use when the serialize function has changed
+    try:
+        animals_data = load_data('animals_data.json')
+        #print(serialize_animal(animals_data))
+        print(replace_info(animals_data))
+        write_new_html_file(animals_data)
+    except FileNotFoundError as e:
+        print(f"Couldn't find an important file! \n{e}")
 
 
 if __name__ == "__main__":
